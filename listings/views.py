@@ -13,7 +13,7 @@ def listings(request):
 
     all_listing = Listing.objects.order_by('-list_date').filter(is_published=True)
 
-    paginator = Paginator(all_listing,6)
+    paginator = Paginator(all_listing,4)
     page_number = request.GET.get('page')
     paged_listings = paginator.get_page(page_number) 
 
@@ -27,12 +27,9 @@ def listings(request):
 
 def listing(request,listing_id):
     listing = get_object_or_404(Listing,pk=listing_id)
-
     context= {
         'list': listing,
     }
-
-
     return render(request,'listings/listing.html',context)
 
 
