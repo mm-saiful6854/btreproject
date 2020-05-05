@@ -34,11 +34,15 @@
     </div>
   </section>
 
+    <!--ALERTS-->
+    {% include 'partial/_alerts.html' %}
+
+
   <section id="dashboard" class="py-4">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <h2>Welcome John</h2>
+          <h2>{{ user.first_name}} {{user.last_name}}</h2>
           <p>Here are the property listings that you have inquired about</p>
           <table class="table">
             <thead>
@@ -49,27 +53,18 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>22</td>
-                <td>45 Drivewood Circle</td>
-                <td>
-                  <a class="btn btn-light" href="#">View Listing</a>
-                </td>
-              </tr>
-              <tr>
-                <td>43</td>
-                <td>22 Westbrook rd</td>
-                <td>
-                  <a class="btn btn-light" href="#">View Listing</a>
-                </td>
-              </tr>
-              <tr>
-                <td>31</td>
-                <td>12 Samson Ave</td>
-                <td>
-                  <a class="btn btn-light" href="#">View Listing</a>
-                </td>
-              </tr>
+            {% if contacts %}
+              {% for con in contacts %}
+                <tr>
+                  <td>{{ con.id }}</td>
+                  <td>{{ con.listing }}</td>
+                  <td>
+                    <a class="btn btn-light" href="{% url 'listing' con.listing_id %}">View Listing</a>
+                  </td>
+                </tr>
+              {% endfor %}
+            {% endif %}
+
             </tbody>
           </table>
         </div>
